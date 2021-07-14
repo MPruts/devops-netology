@@ -139,27 +139,104 @@ HOST: stackoverflow.com
 		
 7. Какие DNS сервера отвечают за доменное имя dns.google? Какие A записи? воспользуйтесь утилитой dig
 		
-		dig dns.google
+		dig NS dns.google
 
-		; <<>> DiG 9.16.1-Ubuntu <<>> dns.google
+		; <<>> DiG 9.16.1-Ubuntu <<>> NS dns.google
 		;; global options: +cmd
 		;; Got answer:
-		;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 48229
-		;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1
+		;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 31827
+		;; flags: qr rd ra; QUERY: 1, ANSWER: 4, AUTHORITY: 0, ADDITIONAL: 1
 
 		;; OPT PSEUDOSECTION:
 		; EDNS: version: 0, flags:; udp: 65494
 		;; QUESTION SECTION:
-		;dns.google.                    IN      A
+		;dns.google.                    IN      NS
 
 		;; ANSWER SECTION:
-		dns.google.             671     IN      A       8.8.8.8
-		dns.google.             671     IN      A       8.8.4.4
+		dns.google.             21599   IN      NS      ns3.zdns.google.
+		dns.google.             21599   IN      NS      ns4.zdns.google.
+		dns.google.             21599   IN      NS      ns2.zdns.google.
+		dns.google.             21599   IN      NS      ns1.zdns.google.
 
-		;; Query time: 48 msec
+		;; Query time: 44 msec
 		;; SERVER: 127.0.0.53#53(127.0.0.53)
-		;; WHEN: Wed Jul 14 06:20:24 UTC 2021
-		;; MSG SIZE  rcvd: 71
+		;; WHEN: Wed Jul 14 10:07:28 UTC 2021
+		;; MSG SIZE  rcvd: 116
+
+А записи севреров ns1.zdns.google. ns2.zdns.google. ns3.zdns.google. ns4.zdns.google.
+
+		dig A ns1.zdns.google. ns2.zdns.google. ns3.zdns.google. ns4.zdns.google.
+
+		; <<>> DiG 9.16.1-Ubuntu <<>> A ns1.zdns.google. ns2.zdns.google. ns3.zdns.google. ns4.zdns.google.
+		;; global options: +cmd
+		;; Got answer:
+		;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 57802
+		;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+		;; OPT PSEUDOSECTION:
+		; EDNS: version: 0, flags:; udp: 65494
+		;; QUESTION SECTION:
+		;ns1.zdns.google.               IN      A
+
+		;; ANSWER SECTION:
+		ns1.zdns.google.        4105    IN      A       216.239.32.114
+
+		;; Query time: 0 msec
+		;; SERVER: 127.0.0.53#53(127.0.0.53)
+		;; WHEN: Wed Jul 14 10:12:45 UTC 2021
+		;; MSG SIZE  rcvd: 60
+
+		;; Got answer:
+		;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 42655
+		;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+		;; OPT PSEUDOSECTION:
+		; EDNS: version: 0, flags:; udp: 65494
+		;; QUESTION SECTION:
+		;ns2.zdns.google.               IN      A
+
+		;; ANSWER SECTION:
+		ns2.zdns.google.        5704    IN      A       216.239.34.114
+
+		;; Query time: 0 msec
+		;; SERVER: 127.0.0.53#53(127.0.0.53)
+		;; WHEN: Wed Jul 14 10:12:45 UTC 2021
+		;; MSG SIZE  rcvd: 60
+
+		;; Got answer:
+		;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 39474
+		;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+		;; OPT PSEUDOSECTION:
+		; EDNS: version: 0, flags:; udp: 65494
+		;; QUESTION SECTION:
+		;ns3.zdns.google.               IN      A
+
+		;; ANSWER SECTION:
+		ns3.zdns.google.        7196    IN      A       216.239.36.114
+
+		;; Query time: 0 msec
+		;; SERVER: 127.0.0.53#53(127.0.0.53)
+		;; WHEN: Wed Jul 14 10:12:45 UTC 2021
+		;; MSG SIZE  rcvd: 60
+
+		;; Got answer:
+		;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 57675
+		;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+		;; OPT PSEUDOSECTION:
+		; EDNS: version: 0, flags:; udp: 65494
+		;; QUESTION SECTION:
+		;ns4.zdns.google.               IN      A
+
+		;; ANSWER SECTION:
+		ns4.zdns.google.        7196    IN      A       216.239.38.114
+
+		;; Query time: 0 msec
+		;; SERVER: 127.0.0.53#53(127.0.0.53)
+		;; WHEN: Wed Jul 14 10:12:45 UTC 2021
+		;; MSG SIZE  rcvd: 60
+
 
 8. Проверьте PTR записи для IP адресов из задания 7. Какое доменное имя привязано к IP? воспользуйтесь утилитой dig
 		
