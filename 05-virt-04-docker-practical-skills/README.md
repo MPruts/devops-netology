@@ -127,5 +127,10 @@ Ubuntu
         
         CMD npm start
 ```
+Сборка и запуск образа
+
+      docker build -t prumyu/nodejs-demo -f dockerfile_task3 .
+      docker run --name nodejs-demo -p 3000:3000 -d prumyu/nodejs-demo
+
 ![](task3_screen6.png)
 ![](task3_screen7.png)
