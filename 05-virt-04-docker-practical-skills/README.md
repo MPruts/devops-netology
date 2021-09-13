@@ -35,9 +35,9 @@ CMD ["Hey, netology”]
     CMD ["Hey, netology”]
 ```
 ![](task1_screen1.png)
-```
-https://hub.docker.com/r/prumyu/netology_05-virt-04-docker-practical-skills_1
-```
+
+Ссылка на образ в хранилище docker-hub [netology_05-virt-04-docker-practical-skills_1](https://hub.docker.com/r/prumyu/netology_05-virt-04-docker-practical-skills_1)
+
 
 Задача 2 
 
