@@ -3,6 +3,7 @@
 docker run --name pg12_1 -e POSTGRES_PASSWORD=password  -v pg-data:/var/lib/postgresql/data -v pg-backup:/pg_backup -d postgres:12
 ```
 Задача 2
+
 - создайте пользователя test-admin-user и БД test_db
 ```
 create database test_db;
@@ -151,6 +152,7 @@ test_db=# EXPLAIN  select cl.lastname, ord.description from clients as cl inner 
 
 ```
 Задача 6
+
 Создайте бэкап БД test_db и поместите его в volume, предназначенный для бэкапов (см. Задачу 1).
 ```
 pg_dump -U postgres test_db > /pg_backup/test_db_backup
