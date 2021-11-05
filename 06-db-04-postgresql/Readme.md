@@ -71,6 +71,5 @@ COMMIT;
 pg_dump -U postgres test_database > /tmp/test_dump_new.sql
 ```
 Как бы вы доработали бэкап-файл, чтобы добавить уникальность значения столбца `title` для таблиц `test_database`?
-```
+
 Добавил параметр `UNIQUE` в файле дампа [test_dump_new.sql](test_dump_new.sql) БД `test_database` при создании таблицы `orders` для столбца `title`
-```
