@@ -20,3 +20,5 @@ RUN yum install -y wget curl && \
     echo "cluster.initial_master_nodes: netology_test" >> /opt/elasticsearch/config/elasticsearch.yml
 
 USER elasticsearch
+
+CMD ["/opt/elasticsearch/bin/elasticsearch -d"]
