@@ -22,4 +22,4 @@ RUN yum install -y wget curl && \
 
 USER elasticsearch
 
-CMD ["/opt/elasticsearch/bin/elasticsearch -d"]
+CMD ["/opt/elasticsearch/bin/elasticsearch"]
