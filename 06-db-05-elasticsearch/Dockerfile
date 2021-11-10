@@ -7,6 +7,7 @@ EXPOSE 9200
 RUN yum install -y wget curl && \
     wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.15.1-linux-x86_64.tar.gz && \
     tar xzf elasticsearch-7.15.1-linux-x86_64.tar.gz && \
+    rm -rf elasticsearch-7.15.1-linux-x86_64.tar.gz && \
     mv elasticsearch-7.15.1 elasticsearch && \
     useradd elasticsearch && \
     usermod -aG wheel elasticsearch && \
