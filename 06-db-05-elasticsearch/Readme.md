@@ -28,4 +28,6 @@ USER elasticsearch
 CMD ["/opt/elasticsearch/bin/elasticsearch"]
 ```
 
-Ссылка на docker образ [prumyu/elasticsearch]()
+Ссылка dockerhub на docker образ [prumyu/elasticsearch](https://hub.docker.com/repository/docker/prumyu/elasticsearch)
+
+![](screen1.png)
