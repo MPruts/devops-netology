@@ -1,4 +1,5 @@
 ### Задача 1
+![](zadanie1.png)
 ### Задача 2
 Вывод команды `terraform workspace list` находится в файле [workspace_list.txt](workspace_list.txt)
 
