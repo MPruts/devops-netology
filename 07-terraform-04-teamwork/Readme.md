@@ -1,5 +1,5 @@
 ### Задача 1
-
+![](Zadanie1.png)
 ### Задача 2
 Ссылка на файл конфигурации сервера Atlantis - [server.yaml](server.yaml)
 
