@@ -54,6 +54,33 @@ EOF
 
 }
 
+locals {
+  my3_count_ec2 = {
+    stage = ["one"]
+    prod = ["one", "two"]
+  }
+}
+
+module "ec2_instance" {
+  source  = "terraform-aws-modules/ec2-instance/aws"
+  version = "~> 3.0"
+
+  for_each = toset(local.my3_count_ec2[terraform.workspace])
+
+  name = "instance-${each.key}"
+
+  ami           = data.aws_ami.ubuntu.id
+  instance_type = local.my1_instance_type_map[terraform.workspace]
+  key_name               = "user1"
+  monitoring             = true
+  vpc_security_group_ids = ["sg-12345678"]
+  subnet_id              = "subnet-eddcdzz4"
+
+  tags = {
+    Terraform   = "true"
+    Environment = "dev"
+  }
+}
 
 
 terraform {
@@ -65,7 +92,7 @@ terraform {
 }
 
 
-data "aws_ami" "amazon_linux" {
+/*data "aws_ami" "amazon_linux" {
   most_recent = true
   owners      = ["amazon"]
   filter {
@@ -81,7 +108,7 @@ data "aws_ami" "amazon_linux" {
 locals {
   instances = {
     "t2.micro" = data.aws_ami.amazon_linux.id
-    "t2.large" = data.aws_ami.ubuntu.id
+    "t2.micro" = data.aws_ami.ubuntu.id
   }
 }
 
@@ -91,3 +118,4 @@ resource "aws_instance" "my_instances" {
   ami = each.value
   instance_type = each.key
 }
+*/
