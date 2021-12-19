@@ -10,10 +10,10 @@ output "region" {
   value = data.aws_region.mytestregion.name
 }
 
-output "ip_addr" {
+/* output "ip_addr" {
   value = aws_instance.web.private_ip
 }
 
 output "id_network" {
   value = aws_instance.web.subnet_id
-}
+}*/

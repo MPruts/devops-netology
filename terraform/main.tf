@@ -1,7 +1,18 @@
 provider "aws" {
   region = "us-east-2"
 }
-
+locals {
+  my1_instance_type_map = {
+    stage = "t3.micro"
+    prod = "t2.micro"
+  }
+}
+locals {
+  my2_count_ec2_map = {
+    stage = 1
+    prod = 2
+  }
+}
 data "aws_ami" "ubuntu" {
   most_recent = true
 
@@ -24,7 +35,8 @@ data "aws_caller_identity" "mytestcalleridentity" {}
 
 resource "aws_instance" "web" {
   ami           = data.aws_ami.ubuntu.id
-  instance_type = "t2.micro"
+  instance_type = local.my1_instance_type_map[terraform.workspace]
+  count = local.my2_count_ec2_map[terraform.workspace]
 
   tags = {
     Name = "Mikhail"
@@ -36,5 +48,46 @@ resource "aws_instance" "web" {
 apt update
 app upgrade -y
 EOF
+  lifecycle {
+    create_before_destroy = true
+  }
 
+}
+
+
+
+terraform {
+  backend "s3" {
+    bucket  = "prumyu.07-terraform-03-basic"
+    key     = "prumyu.07-terraform-03-basic.states/terraform.tfstate"
+    region  = "us-east-2"
+  }
+}
+
+
+data "aws_ami" "amazon_linux" {
+  most_recent = true
+  owners      = ["amazon"]
+  filter {
+    name = "name"
+    values = ["amzn-ami-hvm-*-x86_64-gp2"]
+  }
+  filter {
+    name = "owner-alias"
+    values = ["amazon"]
+  }
+}
+
+locals {
+  instances = {
+    "t2.micro" = data.aws_ami.amazon_linux.id
+    "t2.large" = data.aws_ami.ubuntu.id
+  }
+}
+
+resource "aws_instance" "my_instances" {
+  for_each = local.instances
+
+  ami = each.value
+  instance_type = each.key
 }

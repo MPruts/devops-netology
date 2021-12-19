@@ -1,0 +1,4 @@
+mikle@pc-0000:~/netology/devops-netology/terraform$ terraform workspace list
+  default
+* prod
+  stage
