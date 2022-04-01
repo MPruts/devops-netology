@@ -1,0 +1,1 @@
+Ссылка на репозиторий [example-teamcity](https://github.com/MPruts/example-teamcity) с выполненным домашним заданием по теме 09-ci-05-teamcity
