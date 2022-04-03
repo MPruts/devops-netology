@@ -1,0 +1,1 @@
+Ссылка на проект [gitlab](https://gitlab.com/mpruts/09-ci-06-gitlab/-/tree/main)
