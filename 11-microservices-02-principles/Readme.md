@@ -4,8 +4,12 @@
 | Amazon API Gateway | | | |
 | NGinx API Gateway | | | |
 | Netflix Zuul | | | |
-| Tyk | | | |
+| Tyk | + | + | + |
 | Google Api Gateway | | | |
 | Akamai Api Gateway | | | |
+| KrakenD | + | + | + |
+| API Umbrella | + | + | + |
+
+
 
 #### Задание 2
