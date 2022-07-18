@@ -1,0 +1,51 @@
+# PostgreSQL StatefulSet
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: pg-db
+spec:
+  serviceName: pg-db-service
+  selector:
+    matchLabels:
+      app: pg-db
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: pg-db
+    spec:
+      containers:
+        - name: pg-db
+          image: postgres:latest
+          volumeMounts:
+            - name: pg-db-disk
+              mountPath: /data
+          env:
+            - name: POSTGRES_PASSWORD
+              value: testpassword
+            - name: PGDATA
+              value: /data/pgdata
+  # Volume Claim
+  volumeClaimTemplates:
+    - metadata:
+        name: pg-db-disk
+      spec:
+        accessModes: ["ReadWriteMany"]
+        resources:
+          requests:
+            storage: 1Gi
+---
+# PostgreSQL StatefulSet Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: pg-db-lb
+spec:
+  selector:
+    app: pg-db
+  type: LoadBalancer
+  ports:
+    - port: 5432
+      targetPort: 5432
+
+

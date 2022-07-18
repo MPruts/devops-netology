@@ -1,0 +1,84 @@
+# Config Postgres Pod
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: pg-db
+spec:
+  serviceName: postgres-svc
+  selector:
+    matchLabels:
+      app: netology
+      tier: pg-db
+  template:
+    metadata:
+      labels:
+        app: netology
+        tier: pg-db
+    spec:
+      containers:
+      - name: pg-db
+        image: postgres:latest
+        envFrom:
+          - configMapRef:
+              name: pg-config
+        ports:
+        - containerPort: 5432
+          name: pgdb
+        volumeMounts:
+        - name: pgdb
+          mountPath: /var/lib/postgresql
+          subPath: postgres
+  volumeClaimTemplates:
+  - metadata:
+      name: pgdb
+    spec:
+      accessModes: ["ReadWriteMany"]
+      resources:
+        requests:
+          storage: 1Gi
+# Config Service
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pg-config
+  labels:
+    app: netology
+    tier: pg-db
+data:
+  POSTGRES_DB: prod-db
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: postgres
+  PGDATA: /var/lib/postgresql/data/pgdata
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-svc
+  labels:
+    app: netology
+    tier: pg-db
+spec:
+  type: NodePort
+  ports:
+   - port: 5432
+  selector:
+    app: netology
+    tier: pg-db
+
+# Config PersistentVolume
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-pv-prod
+  labels:
+    type: local
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  hostPath:
+    path: /home/nfs

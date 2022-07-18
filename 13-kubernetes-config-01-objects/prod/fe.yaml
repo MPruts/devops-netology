@@ -1,0 +1,42 @@
+# Config Front
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fe-prod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: netology
+      tier: fe
+  template:
+    metadata:
+      labels:
+        app: netology
+        tier: fe
+    spec:
+      containers:
+      - name: front
+        image: chrischinchilla/humanitech-product-fe
+        imagePullPolicy: "IfNotPresent"
+        ports:
+        - name: http
+          containerPort: 8080
+        env:
+        - name: PRODUCT_BACK_SERVER_URL
+          value: be-prod
+# Config Service
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: fe-prod-svc
+spec:
+    type: NodePort
+    ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+    selector:
+        app: netology
+        tier: fe

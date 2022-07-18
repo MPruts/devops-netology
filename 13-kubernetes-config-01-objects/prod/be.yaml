@@ -1,0 +1,56 @@
+# Config Back
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: netology
+    tier: be
+  name: be-prod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: netology
+      tier: be
+  template:
+    metadata:
+      labels:
+        app: netology
+        tier: be
+    spec:
+      containers:
+      - env:
+        - name: DATABASE_HOST
+          value: pg-db
+        - name: DATABASE_NAME
+          value: prod-db
+        - name: DATABASE_PASSWORD
+          value: postgres
+        - name: DATABASE_USER
+          value: postgres
+        - name: DATABASE_PORT
+          value: "5432"
+        image: chrischinchilla/humanitech-product-be
+        imagePullPolicy: "IfNotPresent"
+        name: be-prod
+        ports:
+        - containerPort: 8080
+      restartPolicy: Always
+# Config Service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: netology
+    tier: be
+  name: be-prod-svc
+spec:
+  type: NodePort
+  ports:
+  - name: "8080"
+    port: 8080
+    targetPort: 8080
+  selector:
+    app: netology
+    tier: be
