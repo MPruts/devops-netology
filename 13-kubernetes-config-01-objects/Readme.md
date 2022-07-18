@@ -15,6 +15,6 @@
 
 [BE.YAML](prod/be.yaml)
 
-[PG-DB-PROD.yaml](prod/pg-db-prod.yaml)
+[PG-DB-PROD.YAML](prod/pg-db-prod.yaml)
 
 ![](prod/2_1.png)
