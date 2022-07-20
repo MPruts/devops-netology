@@ -1,0 +1,15 @@
+kind: Pod
+metadata:
+  name: be
+spec:
+  containers:
+    - name: busybox 
+      image: busybox
+      command: ["sleep", "3600"]
+      volumeMounts:
+        - mountPath: "/static"
+          name: my-volume
+  volumes:
+    - name: my-volume
+      persistentVolumeClaim:
+        claimName: pvc
